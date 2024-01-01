@@ -1,8 +1,8 @@
 resource "maas_vm_host_machine" "test-ubuntu2204" {
-  vm_host = "vm01"
+  vm_host = "maas"
   cores = 2
   memory = 2048
-  hostname = "maasserver"
+  hostname = "test-ubuntu2204"
   storage_disks {
     size_gigabytes = 15
   }
