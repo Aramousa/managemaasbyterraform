@@ -14,8 +14,8 @@ resource "maas_fabric" "rssbl_fabric" {
 #VLANs
 resource "maas_vlan" "rssbl_vlan" {
 	fabric = maas_fabric.rssbl_fabric.id
-	vid = 14
-	name = "rssbl-vlan14"
+	vid = 11
+	name = "rssbl-vlan11"
 	space = maas_space.rssbl_space.name
  }
 
@@ -24,9 +24,9 @@ data "maas_vlan" "default" {
 	vlan = 0
  }
 
-data "maas_vlan" "vid10" {
+data "maas_vlan" "vlanid12" {
 	fabric = data.maas_facric.default.id
-	vlan = 10
+	vlan = 12
  }
 
 #Subnets
@@ -35,7 +35,7 @@ data "maas_subnet" "pxe" {
 	cidr = "10.20.0.0/16"
  }
 
-data "maas_subnet" "vid10" {
+data "maas_subnet" "vlanid12" {
 	cidr = "10.21.0.0/16"
  }
 
@@ -68,8 +68,7 @@ resource "maas_subnet" "rssbl_subnet_2" {
 	gateway_ip = "10.10.13.1"
 	dns_servers = [
 		"1.1.1.1",
-		"8.8.8.8",
-	 ]
+		"8.8.8.8"'
  }
 
 resource "maas_subnet_ip_range" "reserved_ip_range" {
@@ -95,10 +94,10 @@ resource "maas_dns_domain" "runsensible" {
  }
 
 # DNS Records
-resource "maas_dns_record" "rssbl_a" {
+resource "maas_dns_record" "rssbl-a" {
 	type = "A/AAAA"
 	data = "10.10.12.101"
-	fqdn = "rssbl-a.${maas_dns_domain.runsensible.name}"
+	fqdn "rssbl_a.${maas_dns_domain.runsensible.name}"
  }
 
 resource "maas_dns_record" "rssble_aaaa" {

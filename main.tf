@@ -1,32 +1,15 @@
-resource "maas_vm_host" "maasserver" {
-  type = "virsh"
-  power_address = "qemu+ssh://arash@10.10.10.26/system"
-  tags = [
-    "pod-console-logging",
-    "virtual",
-    "kvm",
-  ]
+terraform {
+  required_providers {
+    maas = {
+      source = "registry.terraform.io/maas/maas"
+    }
+  }
 }
 
-resource "maas_vm_host_machine" "linux-vm" {
-  vm_host = "maasserver"
-  #vm_host = maas_vm_host.maasserver.id
-  cores = 1
-  memory = 2048
-  hostname = "linux-vm"
-  storage_disks {
-    size_gigabytes = 15
-  }
-  pool = "default"
-}
+provider "maas" {
+	api_version = "2.0"
+	api_key     = "dZbSp3KJtMBDRuuGPF:q9zFPRvVRNGM39sesd:M9ERFX96kARXyETBERcXGyz5k2sQGRPc"
+	api_url     = "http://10.10.10.26:5240/MAAS"
+ }
 
-resource "maas_instance" "test-vm" {
-  allocate_params {
-    min_cpu_count = 2
-    min_memory = 2048
-  }
-  deploy_params {
-    distro_series = "jammy"
-  }
-  depends_on = [maas_vm_host_machine.linux-vm]
-}
+#provider "maas" {}
