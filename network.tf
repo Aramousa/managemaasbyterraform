@@ -3,7 +3,7 @@ resource "maas_space" "rssbl_space" {
  }
 
 #Fabrics
-resource "maas_fabric" "default" {
+data "maas_fabric" "default" {
 	name = "maas"
  }
 
@@ -25,7 +25,7 @@ data "maas_vlan" "default" {
  }
 
 data "maas_vlan" "vid10" {
-	fabric = data.maas_facric.default.id
+	fabric = data.maas_fabric.default.id
 	vlan = 10
  }
 
