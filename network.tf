@@ -3,7 +3,7 @@ resource "maas_space" "rssbl_space" {
  }
 
 #Fabrics
-data "maas_fabric" "default" {
+resource "maas_fabric" "default" {
 	name = "maas"
  }
 
@@ -20,22 +20,22 @@ resource "maas_vlan" "rssbl_vlan" {
  }
 
 data "maas_vlan" "default" {
-	fabric = data.maas_fabric.default.id
+	fabric = maas_fabric.default.id
 	vlan = 0
  }
 
 data "maas_vlan" "vid10" {
-	fabric = data.maas_fabric.default.id
+	fabric = maas_fabric.default.id
 	vlan = 10
  }
 
 #Subnets
 
-data "maas_subnet" "pxe" {
+resource "maas_subnet" "pxe" {
 	cidr = "10.20.0.0/16"
  }
 
-data "maas_subnet" "vid10" {
+resource "maas_subnet" "vid10" {
 	cidr = "10.21.0.0/16"
  }
 

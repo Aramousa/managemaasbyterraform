@@ -31,7 +31,7 @@ resource "maas_vm_host_machine" "maas_machine_1" {
 
 	network_interfaces {
 		name = "eth0"
-		subnet_cidr = data.maas_subnet.pxe.cidr
+		subnet_cidr = maas_subnet.pxe.cidr
 	 }
 
 	storage_disks {
